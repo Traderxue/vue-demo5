@@ -12,17 +12,25 @@ const fold = () => {
 const logout = () =>{
   router.push("/login")
 }
+
+const refresh = () =>{
+  window.location.reload()
+}
+
 </script>
 
 <template>
   <div class="header">
-    <div class="left">
-      <el-icon @click="fold" v-if="myStore.isCollapse"><Expand /></el-icon>
-      <el-icon @click="fold" v-else><Fold /></el-icon>
+    <div class="left" @click="fold">
+      <el-icon v-if="myStore.isCollapse"><Expand /></el-icon>
+      <el-icon v-else><Fold /></el-icon>
     </div>
     <div class="right">
       <div class="msg">
         <!-- <span>消息</span> -->
+        <div class="refresh" @click="refresh">
+        <el-icon><RefreshRight /></el-icon>
+        </div>
         <el-badge is-dot class="item">
           <el-icon><ChatDotSquare /></el-icon>
         </el-badge>
@@ -74,6 +82,11 @@ const logout = () =>{
       span {
         font-size: 15px;
         margin: 0px 5px;
+      }
+      .refresh{
+        width: auto;
+        height: 100%;
+        margin-right: 15px;
       }
     }
     .el-dropdown-item {

@@ -2,21 +2,23 @@
 import { onMounted, ref } from "vue";
 import * as echarts from "echarts";
 
-
 const option = {
+  tooltip: {
+    trigger: "axis",
+  },
   xAxis: {
-    type: 'category',
-    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    type: "category",
+    data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
   },
   yAxis: {
-    type: 'value'
+    type: "value",
   },
   series: [
     {
       data: [150, 230, 224, 218, 135, 147, 260],
-      type: 'line'
-    }
-  ]
+      type: "line",
+    },
+  ],
 };
 
 const topData = ref([
@@ -52,43 +54,48 @@ const topData = ref([
   },
 ]);
 
-let chart
+const chart = ref(null);
 
 onMounted(() => {
-
-  chart = ref(null);
+  console.log(chart.value);
 
   const myChart = echarts.init(chart.value);
 
   option && myChart.setOption(option);
+
+  window.addEventListener("resize", () => {
+    myChart.resize();
+  });
 });
 </script>
 
 <template>
-    <div class="homepage">
+  <div class="homepage">
+    <el-card>
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item :to="{ path: '/homepage' }">首页</el-breadcrumb-item>
+      </el-breadcrumb>
       <div class="top">
-        <el-card v-for="(item, index) in topData" :key="index">
-          <div class="per">
-            <p>{{ item.title }}</p>
-            <div>
-              <span class="span1">{{ item.price }}</span>
-              <span class="span2">{{ item.parcent }}</span>
-            </div>
-            <span class="span3">{{ item.context }}</span>
+        <div class="per" v-for="(item, index) in topData" :key="index">
+          <p>{{ item.title }}</p>
+          <div>
+            <span class="span1">{{ item.price }}</span>
+            <span class="span2">{{ item.parcent }}</span>
           </div>
-        </el-card>
+          <span class="span3">{{ item.context }}</span>
+        </div>
       </div>
-      <el-card>
-        <div class="chart" ref="chart" style="width: 600px;height: 600px;"></div>
-      </el-card>
-    </div>
-  </template>
+      <div class="chart" ref="chart" style="width: 100%; height: 600px"></div>
+    </el-card>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 .homepage {
   .top {
     display: flex;
     justify-content: space-around;
+    margin: 20px 0px;
     .per {
       width: auto;
       height: 120px;
@@ -118,7 +125,7 @@ onMounted(() => {
     }
   }
 }
-.el-card{
-    margin-top: 20px;
+.el-card {
+  margin-top: 20px;
 }
 </style>

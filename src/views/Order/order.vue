@@ -39,31 +39,22 @@ const editableTabs = ref([
   },
 ]);
 </script>
+
 <template>
   <div class="order">
     <el-card>
-      <el-tabs
-        v-model="editableTabsValue"
-        type="card"
-        :editable="true"
-        class="demo-tabs"
-        @edit="handleTabsEdit"
-      >
-        <el-tab-pane
-          v-for="item in editableTabs"
-          :key="item.name"
-          :label="item.title"
-          :name="item.name"
-        >
-          {{ item.content }}
-        </el-tab-pane>
-      </el-tabs>
-    </el-card>
-    <el-card>
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item :to="{ path: '/homepage' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>开单记录</el-breadcrumb-item>
+      </el-breadcrumb>
       <el-table :data="tableData" style="width: 100%">
         <el-table-column prop="date" label="Date" width="180" />
         <el-table-column prop="name" label="Name" width="180" />
         <el-table-column prop="address" label="Address" />
+        <el-table-column label="操作">
+          <el-button size="small" type="danger">删除</el-button>
+          <el-button size="small" type="warning">编辑</el-button>
+        </el-table-column>
       </el-table>
     </el-card>
   </div>
@@ -72,5 +63,8 @@ const editableTabs = ref([
 <style lang="scss" scoped>
 .el-card {
   margin: 15px 0px;
+}
+.el-table{
+  margin: 25px 0px;
 }
 </style>
