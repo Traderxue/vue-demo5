@@ -39,9 +39,9 @@ const myStore = useMyStore()
   background: #364f6b;
 }
 .el-header{
-  background: #f5f5f5;
+  background: #a6e3e9;
 }
 .el-main{
-  background: #f5f5f5;
+  background: #c9d6df;
 }
 </style>
