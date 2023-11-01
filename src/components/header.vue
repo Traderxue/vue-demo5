@@ -1,10 +1,17 @@
 <script setup>
+import { useRouter } from "vue-router";
 import { useMyStore } from "../stores/myStore";
+
+const router = useRouter()
 const myStore = useMyStore();
 
 const fold = () => {
   myStore.isCollapse = !myStore.isCollapse;
 };
+
+const logout = () =>{
+  router.push("/login")
+}
 </script>
 
 <template>
@@ -31,7 +38,7 @@ const fold = () => {
           <el-dropdown-menu>
             <el-dropdown-item>项目地址</el-dropdown-item>
             <el-dropdown-item>个人中心</el-dropdown-item>
-            <el-dropdown-item>退出</el-dropdown-item>
+            <el-dropdown-item @click="logout">退出</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
