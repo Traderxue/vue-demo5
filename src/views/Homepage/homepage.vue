@@ -46,12 +46,6 @@ const topData = ref([
     parcent: "+2.16%",
     context: "Component past",
   },
-  {
-    title: "Sales",
-    price: "$23465",
-    parcent: "+2.16%",
-    context: "Component past",
-  },
 ]);
 
 const chart = ref(null);
